@@ -108,31 +108,51 @@ function getComputerChoice(){
 
 
 function playRound(humanChoice, computerChoice) {
-    const mostrar = document.createElement("p");
-    mostrar.style.cssText = "color: white; background: black;";
-
+    
     if (humanChoice === "rock" && computerChoice === "scissors" ||
         humanChoice === "paper" && computerChoice === "rock" ||
         humanChoice === "scissors" && computerChoice === "paper") {
-        mostrar.textContent = "HUMANO";
-        result.appendChild(mostrar);
+        mostrar("HUMANO");
         //console.log("Humano");
-        return humanScore++;
+        humanScore++;
     } else if (humanChoice === computerChoice) {
-        mostrar.textContent = "EMPATE";
-        result.appendChild(mostrar);
+        mostrar("EMPATE");
         //console.log("Empate");
-        return 0;
     } else {
-        mostrar.textContent = "COMPUTADORA";
-        result.appendChild(mostrar);
+        mostrar("COMPUTADORA");
         //console.log("Computadora");
-        return computerScore++;
+        computerScore++;
     }
     
+    if (computerScore === 5 || humanScore === 5) {
+        playGame(computerScore, humanScore);
+        computerScore = 0;
+        humanScore = 0;
+    }
+}
+
+const mostrar = (elemento) => {
+    const mostrar = document.createElement("p");
+    mostrar.style.cssText = "color: white; background: black;";
+    mostrar.textContent = elemento;
+    result.appendChild(mostrar);
 }
 
 
+function playGame(cS, hS) {
+    const ganador = document.createElement("p");
+    ganador.style.cssText = "color: green";
+
+    
+    if (cS > hS) {
+        console.log("Computer wins!");
+        ganador.textContent = "Computer WINS!!!";
+    }else if (cS < hS) {
+        console.log("Human wins!");
+        ganador.textContent = "Human WINS!!!";
+    }
+    result.appendChild(ganador);
+}
 
 const body = document.querySelector("body");
 
