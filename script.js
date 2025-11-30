@@ -1,4 +1,4 @@
-console.log("Hello world!");
+/*console.log("Hello world!");
 let humanScore = 0;
 let computerScore = 0;
 
@@ -76,9 +76,122 @@ for (let i = 0; i < 5; i++) {
     computerScore = 0;
     humanScore = 0;
 }
+*/
+
+//const { createElement } = require("react");
+
+let humanScore = 0;
+let computerScore = 0;
+
+//Opcion de la maquina
+function getComputerChoice(){
+    let opc;
+    let choice;
+    
+    opc = Math.floor(Math.random() * 3);
+
+    switch (opc) {
+        case 0: 
+            return choice = "rock";
+            break;
+        case 1: 
+            return choice = "paper";
+            break;
+        case 2: 
+            return choice = "scissors";
+            break;
+    
+        default:
+            break;
+    }
+}
+
+
+function playRound(humanChoice, computerChoice) {
+    const mostrar = document.createElement("p");
+    mostrar.style.cssText = "color: white; background: black;";
+
+    if (humanChoice === "rock" && computerChoice === "scissors" ||
+        humanChoice === "paper" && computerChoice === "rock" ||
+        humanChoice === "scissors" && computerChoice === "paper") {
+        mostrar.textContent = "HUMANO";
+        result.appendChild(mostrar);
+        //console.log("Humano");
+        return humanScore++;
+    } else if (humanChoice === computerChoice) {
+        mostrar.textContent = "EMPATE";
+        result.appendChild(mostrar);
+        //console.log("Empate");
+        return 0;
+    } else {
+        mostrar.textContent = "COMPUTADORA";
+        result.appendChild(mostrar);
+        //console.log("Computadora");
+        return computerScore++;
+    }
+    
+}
+
+
+
+const body = document.querySelector("body");
+
+//1. Crear el contenedor de los botones.
+const div = document.createElement("div");
+div.classList.add("new");
+body.appendChild(div);
+
+//2. Crear el boton de rock
+const btnRock = document.createElement("button");
+btnRock.id = "rock";
+btnRock.textContent = "Piedra";
+
+//3. Crear el boton de papel
+const btnPaper = document.createElement("button");
+btnPaper.id = "paper";
+btnPaper.textContent = "Papel"
+
+//4. Crear el boton de scissors
+const btnScissors = document.createElement("button");
+btnScissors.id = "tijera";
+btnScissors.textContent = "Tijeras";
+
+
+
+div.appendChild(btnRock);
+div.appendChild(btnPaper);
+div.appendChild(btnScissors);
 
 
 
 
+// Eventos
+btnRock.addEventListener("click", function() { 
+    let human = "rock";
+    playRound(human, getComputerChoice()); 
+});
+
+btnPaper.addEventListener("click", function() { 
+    let human = "paper";
+    playRound(human, getComputerChoice()); 
+});
+
+btnScissors.addEventListener("click", function() { 
+    let human = "scissors";
+    playRound(human, getComputerChoice()); 
+});
 
 
+/*
+const handleButtonClick = (playerChoice) => {
+    const computerSelection = getComputerChoice();
+    playRound(playerChoice, computerSelection);
+};
+
+btnRock.addEventListener("click", () => handleButtonClick("rock"));
+btnPaper.addEventListener("click", () => handleButtonClick("paper")); 
+*/
+
+const result = document.createElement("div");
+result.classList.add("resultado");
+body.appendChild(result);
